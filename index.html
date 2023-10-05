@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Подключение стилей Bootstrap для оформления страницы -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Форма связи</title>
+    <style>
+        /* Чисто для души */
+        body {
+            background-color: #f9f9f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5 mb-4">
+        <h1>Связаться с нами</h1>
+        <form action="form.php" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Имя:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Сообщение:</label>
+                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                <span id="charCount" class="text-muted">0 символов</span>
+            </div>
+            <div class="form-group">
+                <label>Пол:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="мужчина" required>
+                    <label class="form-check-label" for="male">Мужчина</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="женщина" required>
+                    <label class="form-check-label" for="female">Женщина</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="category">Категория:</label>
+                <select class="form-control" id="category" name="category">
+                    <option value="вопрос">Вопрос</option>
+                    <option value="предложение">Предложение</option>
+                    <option value="проблема">Проблема</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="file">Прикрепите файл (DOCX или PDF):</label>
+                <input type="file" class="form-control-file" id="file" name="file" accept=".docx,.pdf,.xsl">
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="subscribe" name="subscribe" value="да" >
+                <label class="form-check-label" for="subscribe">Подписаться на рассылку</label>
+                <span id="subscriptionStatus" class="ml-2">Нет</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Отправить</button>
+            <button type="reset" class="btn btn-secondary mt-3">Сбросить</button>
+        </form>
+        <!-- Кнопка для перехода на другие страницы -->
+        <button class="btn btn-info mt-2" onclick="location.href='result.php'">Просмотреть результаты</button>
+    </div>
+    <script>
+        // Получаем элементы DOM, с которыми будем взаимодействовать
+
+        // Элемент чекбокса для подписки
+        const subscribeCheckbox = document.getElementById('subscribe');
+        // Элемент для отображения статуса подписки (Да/Нет)
+        const subscriptionStatus = document.getElementById('subscriptionStatus');
+        // Добавляем обработчик события 'change' на чекбокс подписки
+        subscribeCheckbox.addEventListener('change', function() {
+            // Обновляем текстовое содержание элемента subscriptionStatus в зависимости от состояния чекбокса
+            subscriptionStatus.textContent = this.checked ? 'Да' : 'Нет';
+        });
+
+        // Элемент textarea для ввода сообщения
+        const messageTextarea = document.getElementById('message');
+        // Элемент для отображения количества символов в текстовом поле
+        const charCount = document.getElementById('charCount');
+        // Добавляем обработчик события 'input' на текстовое поле сообщения
+        messageTextarea.addEventListener('input', function() {
+            // Обновляем текстовое содержание элемента charCount с текущим количеством символов
+            charCount.textContent = this.value.length + ' символов';
+        });
+    </script>
+    <!-- Подключение скриптов 
+      jQuery для облегчения манипуляции с элементами страницы и заимодействие с DOM (Document Object Model) 
+      Popper.js для управления всплывающими подсказками и позиционированием элементов на странице. (Совместно с Bootstrap4)
+      Bootsrap для того что-бы придать готовые стили к нашему серому сайту. -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
